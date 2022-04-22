@@ -8,36 +8,60 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+
+
+
+
+
+
+class Member(Base):
+    __tablename__ = 'Member'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)
+    def to_dict(self):
+        return {}
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+
+        
+class Character(Base):
+    __tablename__ = 'Character'
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    Name = Column(String(250))
+    Description = Column(String(250))
+    
+    Hair_color = Column(String(250))
+    Skin_color = Column(String(250))
+    Eye_color = Column(String(250))
+    Birth_year = Column(String(250))
+    Gender = Column(String(250))
+    Height = Column(Integer())
+    Mass = Column(Integer())
+    
+
+    # Relationship Planet
+    planet_id = Column(Integer, ForeignKey('planet.id'))
+
 
     def to_dict(self):
         return {}
-class Adios(Base):
-    __tablename__ = 'Adios'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+
+class Planet(Base):
+    __tablename__ = 'Planet'
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    Name = Column(String(250))
+    Description = Column(String(250))
+    Gravity = Column(String(250))
+    Climate = Column(String(250))
+    Terrain = Column(String(250))
+    Diameter = Column(Integer())
+    Surface_water = Column(Integer())
+    Rotation_period = Column(Integer())
+    Population = Column(Integer())
+    Orbital_period = Column(Integer())
+   
+    Characters = relationship('Character')
 
     def to_dict(self):
         return {}
